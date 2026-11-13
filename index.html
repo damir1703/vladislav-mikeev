@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Владислав Микеев</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* Layout: one reading column with a narrow label rail on the left; the hero pairs the thesis with a printed "operations receipt". */
+:root {
+  --bg: #ECF0E9;
+  --surface: #F8FAF5;
+  --ink: #14231C;
+  --muted: #55645B;
+  --line: #C9D2C6;
+  --accent: #1E5B43;
+  --on-accent: #F3F6EF;
+  --sand: #C39A4E;
+  --sand-soft: #E7DCBE;
+  --receipt-bg: #FCFBF5;
+  --receipt-ink: #1C1D19;
+  --receipt-line: #B9B7A8;
+  --shadow: 0 18px 40px -22px rgba(20, 35, 28, .45);
+  --f-display: "Unbounded", "Arial Black", "Segoe UI", sans-serif;
+  --f-body: "Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
+  --f-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1914; --surface: #15231C; --ink: #E7ECE3; --muted: #98A99D; --line: #2A3B32;
+    --accent: #72C49C; --on-accent: #0E1914; --sand: #D8B872; --sand-soft: #3B3524;
+    --receipt-bg: #EDE9DA; --receipt-ink: #1C1D19; --receipt-line: #A9A694;
+    --shadow: 0 18px 40px -22px rgba(0, 0, 0, .8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1914; --surface: #15231C; --ink: #E7ECE3; --muted: #98A99D; --line: #2A3B32;
+  --accent: #72C49C; --on-accent: #0E1914; --sand: #D8B872; --sand-soft: #3B3524;
+  --receipt-bg: #EDE9DA; --receipt-ink: #1C1D19; --receipt-line: #A9A694;
+  --shadow: 0 18px 40px -22px rgba(0, 0, 0, .8);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+h1, h2, h3 { text-wrap: balance; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.mono { font-family: var(--f-mono); font-size: .78rem; letter-spacing: .04em; }
+.eyebrow { font-family: var(--f-mono); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+/* top bar */
+.top { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.top nav a { font-size: .92rem; text-decoration: none; color: var(--muted); padding-block: 4px; }
+.top nav a:hover { color: var(--accent); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: 48px; align-items: start; padding-block: 56px 64px; }
+.hero-text { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.hero h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(2.1rem, 6.4vw, 4.4rem); line-height: 1.02; letter-spacing: -.02em; }
+.hero h1 span { display: block; }
+.thesis { font-size: clamp(1.2rem, 2.2vw, 1.5rem); line-height: 1.35; max-width: 30ch; font-weight: 500; }
+.thesis em { font-style: normal; color: var(--accent); }
+.lede { color: var(--muted); max-width: 56ch; }
+.who { display: flex; align-items: center; gap: 16px; }
+.who img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; object-position: 55% 20%; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--line); flex: none; }
+.who div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.who strong { font-weight: 600; }
+.who span { color: var(--muted); font-size: .92rem; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500; cursor: pointer; transition: transform .15s ease; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover { transform: translateY(-1px); }
+
+/* receipt */
+.receipt-wrap { display: flex; justify-content: center; min-width: 0; }
+.receipt {
+  width: 100%; max-width: 380px; background: var(--receipt-bg); color: var(--receipt-ink);
+  font-family: var(--f-mono); font-size: .84rem; line-height: 1.5;
+  padding: 28px 24px 34px; box-shadow: var(--shadow); transform: rotate(1.4deg);
+  --tooth: 9px;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% 100% / calc(2 * var(--tooth)) 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% 100% / calc(2 * var(--tooth)) 100%;
+  animation: print 1.1s cubic-bezier(.2, .7, .2, 1) both;
+}
+@keyframes print { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+.receipt h2 { font-family: var(--f-mono); font-size: .95rem; font-weight: 500; letter-spacing: .14em; text-align: center; }
+.receipt .sub { text-align: center; opacity: .7; font-size: .76rem; }
+.receipt hr { border: 0; border-top: 1px dashed var(--receipt-line); margin: 14px 0; }
+.receipt dl { display: flex; flex-direction: column; gap: 9px; }
+.receipt .row { display: flex; align-items: baseline; gap: 6px; }
+.receipt dt { flex: none; max-width: 62%; }
+.receipt .row::after { content: ""; order: 1; flex: 1; min-width: 12px; border-bottom: 1px dotted var(--receipt-line); transform: translateY(-3px); }
+.receipt dd { order: 2; flex: none; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+.receipt .total { display: flex; flex-direction: column; gap: 2px; }
+.receipt .total b { font-weight: 500; font-size: 1.02rem; letter-spacing: .02em; }
+.barcode { height: 34px; margin-top: 16px; background: repeating-linear-gradient(90deg, var(--receipt-ink) 0 2px, transparent 2px 5px, var(--receipt-ink) 5px 6px, transparent 6px 10px, var(--receipt-ink) 10px 13px, transparent 13px 15px); opacity: .85; }
+
+/* sections */
+.sec { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 16px 40px; padding-block: 56px; border-top: 1px solid var(--line); }
+.sec > header { display: flex; flex-direction: column; gap: 8px; }
+.sec-body { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+.sec h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.15; letter-spacing: -.01em; max-width: 24ch; }
+.sec .intro { color: var(--muted); max-width: 62ch; }
+
+/* translate table */
+.pairs { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.pairs li { display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); gap: 12px; align-items: baseline; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.pairs .from { color: var(--muted); }
+.pairs .arrow { color: var(--sand); font-family: var(--f-mono); text-align: center; }
+.pairs .to { font-weight: 600; }
+.pairs-head { display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); gap: 12px; }
+
+/* track */
+.legend { display: flex; flex-wrap: wrap; gap: 6px 20px; color: var(--muted); font-size: .88rem; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
+.legend .k-bar i { background: var(--sand); }
+.legend .k-mgmt i { background: var(--accent); }
+.track { display: flex; gap: 4px; align-items: flex-end; }
+.stop { min-width: 0; display: flex; flex-direction: column; gap: 8px; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+.stop .bar { height: 14px; border-radius: 4px; background: var(--sand); opacity: .55; transition: height .2s ease, opacity .2s ease; }
+.stop.mgmt .bar { background: var(--accent); }
+.stop:hover .bar { opacity: .85; }
+.stop[aria-selected="true"] .bar { height: 30px; opacity: 1; }
+.stop .when { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: clip; }
+.stop[aria-selected="true"] .when { color: var(--ink); }
+.job { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 18px; }
+.job-head { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline; justify-content: space-between; }
+.job h3 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem; }
+.job .role { color: var(--accent); font-weight: 600; }
+.job .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px 28px; }
+.job h4 { margin: 0 0 8px; font-family: var(--f-mono); font-weight: 500; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.ticks { display: flex; flex-direction: column; gap: 6px; }
+.ticks li { padding-left: 18px; position: relative; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 2px; background: var(--sand); }
+.takeaway { border-top: 1px dashed var(--line); padding-top: 16px; max-width: 64ch; }
+.takeaway b { font-weight: 600; }
+
+/* results */
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.fig { background: var(--accent); color: var(--on-accent); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+.fig .n { font-family: var(--f-display); font-weight: 700; font-size: 2.4rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.fig p { font-size: .96rem; opacity: .92; }
+.done { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 36px; border-top: 1px solid var(--line); }
+.done li { padding-block: 14px; border-bottom: 1px solid var(--line); }
+.done b { display: block; font-weight: 600; }
+.done span { color: var(--muted); font-size: .95rem; }
+
+/* calculator */
+.calc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 28px 40px; align-items: center; }
+.calc h3 { font-family: var(--f-display); font-weight: 500; font-size: 1.1rem; grid-column: 1 / -1; }
+.calc .ctrls { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.calc label { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; font-size: .95rem; }
+.calc label output { font-family: var(--f-mono); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.calc input[type="range"] { width: 100%; accent-color: var(--accent); margin-top: 8px; }
+.calc .out { display: flex; flex-direction: column; gap: 6px; padding-left: 28px; border-left: 2px solid var(--sand); min-width: 0; }
+.calc .big { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.5rem, 3.6vw, 2.1rem); line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.calc .note { grid-column: 1 / -1; color: var(--muted); font-size: .88rem; }
+
+/* ideas */
+.ideas { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.ideas details { border-bottom: 1px solid var(--line); }
+.ideas summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding-block: 18px; }
+.ideas summary::-webkit-details-marker { display: none; }
+.ideas summary h3 { font-size: 1.12rem; font-weight: 600; }
+.ideas summary .src { grid-column: 1; color: var(--muted); font-size: .88rem; }
+.ideas summary .pm { grid-row: 1 / span 2; grid-column: 2; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); position: relative; flex: none; }
+.ideas summary .pm::before, .ideas summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; background: var(--accent); transform: translate(-50%, -50%); transition: transform .2s ease; }
+.ideas summary .pm::after { transform: translate(-50%, -50%) rotate(90deg); }
+.ideas details[open] summary .pm::after { transform: translate(-50%, -50%) rotate(0deg); }
+.ideas summary:hover h3 { color: var(--accent); }
+.card3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px 28px; padding-bottom: 24px; }
+.card3 h4 { margin: 0 0 6px; font-family: var(--f-mono); font-weight: 500; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.card3 p { font-size: .97rem; }
+.caveat { color: var(--muted); font-size: .92rem; max-width: 62ch; }
+
+/* plan */
+.tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.tab { background: transparent; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tab .d { font-family: var(--f-mono); font-size: .76rem; color: var(--muted); letter-spacing: .04em; }
+.tab .t { font-family: var(--f-display); font-weight: 500; font-size: 1rem; }
+.tab:hover { border-color: var(--accent); }
+.tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.tab[aria-selected="true"] .d { color: inherit; opacity: .8; }
+.phase { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px 40px; align-items: start; }
+.phase .goal { grid-column: 1 / -1; font-size: 1.15rem; font-weight: 500; max-width: 54ch; }
+.steps { display: flex; flex-direction: column; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.steps li::before { content: counter(s, decimal-leading-zero); font-family: var(--f-mono); font-size: .76rem; color: var(--sand); padding-top: .3em; }
+.result { background: var(--sand-soft); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.result h4 { margin: 0; font-family: var(--f-mono); font-weight: 500; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; }
+
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px 36px; }
+.facts h3 { font-family: var(--f-mono); font-weight: 500; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: .9rem; background: var(--surface); }
+.kv { display: flex; flex-direction: column; gap: 6px; }
+.kv li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dotted var(--line); padding-bottom: 6px; }
+.kv span:last-child { color: var(--muted); text-align: right; }
+
+/* contact */
+.contact { background: var(--accent); color: var(--on-accent); border-radius: 20px; padding: clamp(28px, 5vw, 52px); display: flex; flex-direction: column; gap: 24px; margin-block: 8px 56px; }
+.contact h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.5rem, 4vw, 2.5rem); line-height: 1.1; max-width: 20ch; }
+.contact p { max-width: 56ch; opacity: .92; }
+.lines { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+.line { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid color-mix(in srgb, var(--on-accent) 35%, transparent); border-radius: 12px; padding: 14px 16px; min-width: 0; }
+.line div { display: flex; flex-direction: column; min-width: 0; }
+.line small { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+.line .val { font-size: 1.08rem; font-weight: 500; overflow-wrap: anywhere; user-select: all; }
+.copy { flex: none; background: var(--on-accent); color: var(--accent); border: 0; border-radius: 999px; padding: 8px 14px; font-size: .86rem; font-weight: 600; cursor: pointer; }
+footer { padding-block: 0 40px; color: var(--muted); font-size: .86rem; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 36px 48px; }
+  .sec { grid-template-columns: minmax(0, 1fr); padding-block: 40px; }
+  .calc, .phase { grid-template-columns: minmax(0, 1fr); }
+  .calc .out { padding-left: 18px; }
+  .job, .calc { padding: 20px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .pairs li, .pairs-head { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .pairs .arrow, .pairs-head span:nth-child(2), .pairs-head span:first-child { display: none; }
+  .pairs .to::before { content: "→ "; color: var(--sand); font-family: var(--f-mono); }
+  .tabs { grid-template-columns: minmax(0, 1fr); }
+  .tab { flex-direction: row; align-items: baseline; gap: 12px; }
+  .stop .when { font-size: .64rem; }
+  .receipt { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .receipt { animation: none; }
+  .btn, .stop .bar, .ideas summary .pm::after { transition: none; }
+}
+</style>
+
+<div class="wrap">
+
+  <div class="top">
+    <span class="eyebrow">Резюме · Ташкент · 2026</span>
+    <nav aria-label="Разделы">
+      <a href="#path">Путь</a>
+      <a href="#results">Результаты</a>
+      <a href="#ideas">Что внедрю</a>
+      <a href="#plan">Первые 90 дней</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Кандидат на позицию операционного директора</span>
+      <h1><span>Владислав</span><span>Микеев</span></h1>
+      <p class="thesis">Знаю операционку <em>с обеих сторон стойки</em>: считал маржу в таблицах и закрывал смену своими руками.</p>
+      <p class="lede">3,5 года в кофейнях Ташкента. Начал бариста, год работал операционным менеджером, сейчас руковожу баром. Выстраиваю закупки, учёт, регламенты и обучение так, чтобы они работали без ручного контроля.</p>
+      <div class="who">
+        <img src="photo.jpg" alt="Владислав Микеев" width="76" height="76">
+        <div>
+          <strong>Старший бариста, Teplo coffee</strong>
+          <span>до этого операционный менеджер, Business Book Coffee</span>
+        </div>
+      </div>
+      <div class="cta">
+        <a class="btn" href="#plan">Что сделаю за 90 дней</a>
+        <a class="btn ghost" href="#contact">Связаться</a>
+      </div>
+    </div>
+
+    <div class="receipt-wrap">
+      <div class="receipt" aria-label="Коротко о кандидате">
+        <h2>ОПЕРАЦИОННЫЙ ЧЕК</h2>
+        <p class="sub">Микеев В. · Ташкент</p>
+        <hr>
+        <dl>
+          <div class="row"><dt>В кофейнях</dt><dd>3,5 года</dd></div>
+          <div class="row"><dt>Компаний</dt><dd>4</dd></div>
+          <div class="row"><dt>Управленческих ролей</dt><dd>2</dd></div>
+          <div class="row"><dt>Норматив потерь</dt><dd>до 1 %</dd></div>
+          <div class="row"><dt>Ввод новичка с нуля</dt><dd>2 недели</dd></div>
+          <div class="row"><dt>Учётные системы</dt><dd>iiko, R-Keeper</dd></div>
+          <div class="row"><dt>Языки</dt><dd>RU, UZ, EN</dd></div>
+        </dl>
+        <hr>
+        <div class="total"><span>ИТОГО К РОЛИ</span><b>ОПЕРАЦИОННЫЙ ДИРЕКТОР</b></div>
+        <div class="barcode" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="why">
+    <header><span class="eyebrow">Почему это работает</span></header>
+    <div class="sec-body">
+      <h2>Бар — это компания в миниатюре</h2>
+      <p class="intro">За стойкой каждый день решаются те же задачи, что и на уровне всей компании, только цикл короче: ошибка в закупке видна уже вечером, а не в квартальном отчёте.</p>
+      <div>
+        <div class="pairs-head eyebrow"><span>За стойкой</span><span></span><span>В масштабе компании</span></div>
+        <ul class="pairs">
+          <li><span class="from">Инвентаризация и товарные остатки</span><span class="arrow" aria-hidden="true">→</span><span class="to">Управление запасами и оборотными деньгами</span></li>
+          <li><span class="from">Food cost и себестоимость напитка</span><span class="arrow" aria-hidden="true">→</span><span class="to">Юнит-экономика и маржа</span></li>
+          <li><span class="from">Заявки на закупку и приёмка товара</span><span class="arrow" aria-hidden="true">→</span><span class="to">Снабжение и работа с поставщиками</span></li>
+          <li><span class="from">Графики смен</span><span class="arrow" aria-hidden="true">→</span><span class="to">Планирование загрузки и фонда оплаты труда</span></li>
+          <li><span class="from">Обучение новичка за две недели</span><span class="arrow" aria-hidden="true">→</span><span class="to">Система найма и адаптации</span></li>
+          <li><span class="from">Стандарты сервиса на смене</span><span class="arrow" aria-hidden="true">→</span><span class="to">Регламенты и контроль качества</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="path">
+    <header><span class="eyebrow">Путь</span></header>
+    <div class="sec-body">
+      <h2>От первой смены до управления процессами</h2>
+      <div class="legend">
+        <span class="k-bar"><i></i>работа за баром</span>
+        <span class="k-mgmt"><i></i>управленческая роль</span>
+        <span>Нажмите на отрезок, чтобы увидеть детали</span>
+      </div>
+      <div class="track" role="tablist" aria-label="Места работы">
+        <button class="stop" role="tab" id="st-0" aria-controls="job-0" aria-selected="false" style="flex: 5 1 0"><span class="bar"></span><span class="when">05.23</span></button>
+        <button class="stop" role="tab" id="st-1" aria-controls="job-1" aria-selected="false" style="flex: 11 1 0"><span class="bar"></span><span class="when">10.23</span></button>
+        <button class="stop mgmt" role="tab" id="st-2" aria-controls="job-2" aria-selected="false" style="flex: 11 1 0"><span class="bar"></span><span class="when">09.24</span></button>
+        <button class="stop mgmt" role="tab" id="st-3" aria-controls="job-3" aria-selected="true" style="flex: 15 1 0"><span class="bar"></span><span class="when">08.25 → сейчас</span></button>
+      </div>
+
+      <article class="job" id="job-0" role="tabpanel" aria-labelledby="st-0" hidden>
+        <div class="job-head"><h3>B&amp;B Coffee House</h3><span class="mono">май 2023 — октябрь 2023 · 6 месяцев</span></div>
+        <span class="role">Бариста</span>
+        <div class="cols">
+          <div><h4>Чем занимался</h4><ul class="ticks"><li>Настройка помола, уход за оборудованием и баром</li><li>Обслуживание гостей, латте-арт</li><li>Оформление витрины и барной стойки</li></ul></div>
+          <div><h4>Учёт и качество</h4><ul class="ticks"><li>Контроль качества и сроков хранения продуктов</li><li>Работа в системе iiko</li></ul></div>
+        </div>
+        <p class="takeaway"><b>Что забрал в управление:</b> привычку к стандарту. Качество держится на мелочах, которые делаются одинаково каждую смену.</p>
+      </article>
+
+      <article class="job" id="job-1" role="tabpanel" aria-labelledby="st-1" hidden>
+        <div class="job-head"><h3>Coffee Nation</h3><span class="mono">октябрь 2023 — сентябрь 2024 · 1 год</span></div>
+        <span class="role">Бариста</span>
+        <div class="cols">
+          <div><h4>Продукт</h4><ul class="ticks"><li>Сорта, регионы происхождения, способы обработки и степени обжарки</li><li>Понимание, как каждый параметр меняет вкус в чашке</li></ul></div>
+          <div><h4>Альтернативное заваривание</h4><ul class="ticks"><li>V60</li><li>Batch brew</li><li>Cold brew и другие методы</li></ul></div>
+        </div>
+        <p class="takeaway"><b>Что забрал в управление:</b> глубокое знание продукта. Невозможно считать себестоимость и спорить с поставщиком, не понимая, за что платит гость.</p>
+      </article>
+
+      <article class="job" id="job-2" role="tabpanel" aria-labelledby="st-2" hidden>
+        <div class="job-head"><h3>Business Book Coffee</h3><span class="mono">сентябрь 2024 — август 2025 · 1 год</span></div>
+        <span class="role">Операционный менеджер</span>
+        <div class="cols">
+          <div><h4>Операционное управление</h4><ul class="ticks"><li>Организация и контроль операционной деятельности</li><li>Разработка и внедрение регламентов</li><li>Оптимизация рабочих процессов</li></ul></div>
+          <div><h4>Финансы и аналитика</h4><ul class="ticks"><li>Финансовая отчётность и анализ показателей</li><li>Контроль расходов, бюджета и себестоимости</li><li>Маржинальный анализ в Excel</li></ul></div>
+          <div><h4>Команда</h4><ul class="ticks"><li>Распределение обязанностей и контроль KPI</li><li>Обучение и оценка сотрудников</li></ul></div>
+          <div><h4>Договоры и поставщики</h4><ul class="ticks"><li>Переговоры и заключение договоров</li><li>Контроль исполнения обязательств</li><li>Документальное сопровождение</li></ul></div>
+        </div>
+        <p class="takeaway"><b>Что забрал в управление:</b> взгляд на кофейню как на бизнес: деньги, договоры, регламенты и люди в одной системе.</p>
+      </article>
+
+      <article class="job" id="job-3" role="tabpanel" aria-labelledby="st-3">
+        <div class="job-head"><h3>Teplo coffee</h3><span class="mono">август 2025 — настоящее время</span></div>
+        <span class="role">Старший бариста</span>
+        <div class="cols">
+          <div><h4>Управление баром</h4><ul class="ticks"><li>Организация работы бара и барной команды</li><li>Графики смен</li><li>Обучение, адаптация, стандарты сервиса</li></ul></div>
+          <div><h4>Финансы</h4><ul class="ticks"><li>Расчёт food cost и себестоимости напитков</li><li>Контроль списаний и потерь</li><li>Анализ маржинальности, бюджет бара</li></ul></div>
+          <div><h4>Склад и закупки</h4><ul class="ticks"><li>Инвентаризация и товарные остатки</li><li>Заявки, приёмка, работа с поставщиками</li><li>Сроки годности и условия хранения</li></ul></div>
+        </div>
+        <p class="takeaway"><b>Что забрал в управление:</b> проверку своих же регламентов на практике. Здесь я внедряю процессы и сам вижу, как они работают на смене.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="results">
+    <header><span class="eyebrow">Результаты</span></header>
+    <div class="sec-body">
+      <h2>Что уже выстроено в Teplo coffee</h2>
+      <div class="figs">
+        <div class="fig"><span class="n">до 1 %</span><p>норматив инвентаризационных потерь в баре</p></div>
+        <div class="fig"><span class="n">2 недели</span><p>план обучения для сотрудников без опыта</p></div>
+      </div>
+      <ul class="done">
+        <li><b>План закупок</b><span>Меньше стоп-листов и неликвидных остатков на складе.</span></li>
+        <li><b>Система контроля товарных остатков</b><span>Остатки видны до того, как позиция закончилась.</span></li>
+        <li><b>Инвентаризация с меньшим числом ошибок</b><span>Единый порядок подсчёта и сверки.</span></li>
+        <li><b>Контроль себестоимости напитков</b><span>Food cost считается по каждой позиции меню.</span></li>
+        <li><b>Обучение и адаптация</b><span>Новички проходят одинаковую программу, а не учатся у того, кто оказался рядом.</span></li>
+      </ul>
+
+      <div class="calc">
+        <h3>Сколько стоят потери: посчитайте на своих цифрах</h3>
+        <div class="ctrls">
+          <div>
+            <label for="buy">Закупки товара в месяц <output id="buy-out" for="buy">200 млн сум</output></label>
+            <input type="range" id="buy" min="20" max="1000" step="10" value="200">
+          </div>
+          <div>
+            <label for="loss">Потери и списания сейчас <output id="loss-out" for="loss">3,0 %</output></label>
+            <input type="range" id="loss" min="1" max="8" step="0.5" value="3">
+          </div>
+        </div>
+        <div class="out" aria-live="polite">
+          <span class="eyebrow">Остаётся в компании при нормативе 1 %</span>
+          <span class="big" id="save-m">4 млн сум в месяц</span>
+          <span id="save-y">48 млн сум в год</span>
+        </div>
+        <p class="note">Это калькулятор для примера, а не данные о вашей компании. Формула: закупки × (текущие потери − 1 %).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="ideas">
+    <header><span class="eyebrow">Что внедрю</span></header>
+    <div class="sec-body">
+      <h2>Шесть практик, которые я принесу с собой</h2>
+      <p class="intro">Каждую из них я уже делал своими руками. В новой компании начну с тех, где потери заметнее всего.</p>
+      <div class="ideas">
+        <details open>
+          <summary><h3>Закупки по плану, а не по ощущениям</h3><span class="src">Опыт: план закупок в Teplo coffee</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="card3">
+            <div><h4>Проблема</h4><p>Ходовая позиция уходит в стоп-лист, а рядом лежит товар, который не продаётся и скоро спишется.</p></div>
+            <div><h4>Что сделаю</h4><p>Минимальный остаток по каждой ключевой позиции, график заказов под поставщиков, отдельный разбор неликвида раз в месяц.</p></div>
+            <div><h4>Как поймём, что работает</h4><p>Число стоп-листов в неделю, доля неликвида в остатках, оборачиваемость склада.</p></div>
+          </div>
+        </details>
+        <details>
+          <summary><h3>Инвентаризация как ритм, а не как аврал</h3><span class="src">Опыт: норматив потерь до 1 %</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="card3">
+            <div><h4>Проблема</h4><p>Недостачу находят раз в месяц, когда причину уже не восстановить.</p></div>
+            <div><h4>Что сделаю</h4><p>Короткие еженедельные пересчёты по самым дорогим позициям, полная инвентаризация по графику, разбор каждого отклонения с ответственным.</p></div>
+            <div><h4>Как поймём, что работает</h4><p>Процент потерь к обороту, число расхождений между учётной системой и фактом.</p></div>
+          </div>
+        </details>
+        <details>
+          <summary><h3>Себестоимость и маржа по каждой позиции</h3><span class="src">Опыт: food cost и маржинальный анализ</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="card3">
+            <div><h4>Проблема</h4><p>Цены поставщиков растут, а технологические карты и цены в меню остаются прежними. Маржа уходит незаметно.</p></div>
+            <div><h4>Что сделаю</h4><p>Актуальные техкарты, пересчёт себестоимости при каждом изменении закупочной цены, матрица ассортимента: маржа против продаж.</p></div>
+            <div><h4>Как поймём, что работает</h4><p>Food cost в процентах от выручки, маржа по категориям, доля убыточных позиций.</p></div>
+          </div>
+        </details>
+        <details>
+          <summary><h3>Ввод нового сотрудника за две недели</h3><span class="src">Опыт: программа обучения с нуля</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="card3">
+            <div><h4>Проблема</h4><p>Каждого новичка учат по-своему, поэтому качество зависит от того, кто сегодня на смене.</p></div>
+            <div><h4>Что сделаю</h4><p>Программа по дням, чек-листы навыков, наставник, аттестация в конце. Одна и та же для всех точек и подразделений.</p></div>
+            <div><h4>Как поймём, что работает</h4><p>Срок выхода на самостоятельную смену, текучесть в первые три месяца, результаты аттестации.</p></div>
+          </div>
+        </details>
+        <details>
+          <summary><h3>Регламенты, которые выполняются</h3><span class="src">Опыт: регламенты в Business Book Coffee</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="card3">
+            <div><h4>Проблема</h4><p>Правила существуют в головах или в папке, которую никто не открывает.</p></div>
+            <div><h4>Что сделаю</h4><p>Короткие чек-листы на открытие, закрытие, приёмку и списания. Проверка исполнения встроена в рабочий день руководителя.</p></div>
+            <div><h4>Как поймём, что работает</h4><p>Доля выполненных чек-листов, число повторяющихся ошибок, время на открытие и закрытие смены.</p></div>
+          </div>
+        </details>
+        <details>
+          <summary><h3>Недельный отчёт на одной странице</h3><span class="src">Опыт: финансовая отчётность и Excel</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="card3">
+            <div><h4>Проблема</h4><p>Собственник узнаёт о проблеме из итогов месяца, когда деньги уже потеряны.</p></div>
+            <div><h4>Что сделаю</h4><p>Один лист раз в неделю: выручка, себестоимость, списания, фонд оплаты труда, отклонения от плана и решения по ним.</p></div>
+            <div><h4>Как поймём, что работает</h4><p>Отчёт приходит в один и тот же день, по каждому отклонению есть решение и ответственный.</p></div>
+          </div>
+        </details>
+      </div>
+      <p class="caveat">Это рабочие гипотезы. Целевые цифры по каждой назову после того, как увижу реальные данные компании.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="plan">
+    <header><span class="eyebrow">Первые 90 дней</span></header>
+    <div class="sec-body">
+      <h2>С чего я начну, когда выйду на работу</h2>
+      <div class="tabs" role="tablist" aria-label="Этапы плана">
+        <button class="tab" role="tab" id="pt-0" aria-controls="ph-0" aria-selected="true"><span class="d">Дни 1–30</span><span class="t">Диагностика</span></button>
+        <button class="tab" role="tab" id="pt-1" aria-controls="ph-1" aria-selected="false"><span class="d">Дни 31–60</span><span class="t">Порядок</span></button>
+        <button class="tab" role="tab" id="pt-2" aria-controls="ph-2" aria-selected="false"><span class="d">Дни 61–90</span><span class="t">Система</span></button>
+      </div>
+
+      <div class="phase" id="ph-0" role="tabpanel" aria-labelledby="pt-0">
+        <p class="goal">Понять, как компания работает на самом деле и где она теряет деньги и время.</p>
+        <ol class="steps">
+          <li>Прохожу каждый ключевой процесс лично, от закупки до клиента. Работаю смены рядом с командой.</li>
+          <li>Собираю базовые цифры: выручка, себестоимость, списания, фонд оплаты труда, стоп-листы, текучесть.</li>
+          <li>Провожу полную инвентаризацию и сверяю её с учётной системой.</li>
+          <li>Разговариваю с каждым руководителем и ключевыми сотрудниками: что мешает работать.</li>
+          <li>Смотрю договоры и условия действующих поставщиков.</li>
+        </ol>
+        <div class="result"><h4>Результат к 30-му дню</h4><p>Карта процессов, список потерь с оценкой в деньгах и 3–5 быстрых улучшений, которые уже запущены.</p></div>
+      </div>
+
+      <div class="phase" id="ph-1" role="tabpanel" aria-labelledby="pt-1" hidden>
+        <p class="goal">Закрыть самые дорогие потери и ввести базовые правила.</p>
+        <ol class="steps">
+          <li>Пишу чек-листы на критичные процессы: открытие и закрытие смены, приёмка, списания.</li>
+          <li>Запускаю регулярную инвентаризацию с нормативом потерь и разбором отклонений.</li>
+          <li>Ввожу план закупок и минимальные остатки по ключевым позициям.</li>
+          <li>Собираю двухнедельную программу ввода новых сотрудников.</li>
+          <li>Начинаю присылать собственнику недельный отчёт на одной странице.</li>
+        </ol>
+        <div class="result"><h4>Результат к 60-му дню</h4><p>Ключевые процессы описаны и выполняются, цифры собираются каждую неделю, первые потери закрыты.</p></div>
+      </div>
+
+      <div class="phase" id="ph-2" role="tabpanel" aria-labelledby="pt-2" hidden>
+        <p class="goal">Сделать так, чтобы операционка работала по ритму и не держалась на ручном контроле.</p>
+        <ol class="steps">
+          <li>Ввожу KPI для руководителей и линейных сотрудников на основе цифр недельного отчёта.</li>
+          <li>Пересматриваю условия с поставщиками и нахожу резервных по ключевым позициям.</li>
+          <li>Провожу анализ маржинальности ассортимента: что продвигать, что пересчитать, что убрать.</li>
+          <li>Ввожу планёрки в едином формате: цифры недели, отклонения, решения, ответственные.</li>
+          <li>Готовлю план на следующий квартал с целями в цифрах.</li>
+        </ol>
+        <div class="result"><h4>Результат к 90-му дню</h4><p>Собственник видит бизнес в цифрах каждую неделю, у руководителей есть понятные цели, у компании есть план на квартал.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="facts">
+    <header><span class="eyebrow">Навыки и факты</span></header>
+    <div class="sec-body">
+      <div class="facts">
+        <div><h3>Инструменты</h3><ul class="chips"><li>iiko</li><li>R-Keeper</li><li>Excel и таблицы</li></ul></div>
+        <div><h3>Управление</h3><ul class="chips"><li>Регламенты</li><li>KPI</li><li>Графики смен</li><li>Обучение</li><li>Инвентаризация</li></ul></div>
+        <div><h3>Финансы и договоры</h3><ul class="chips"><li>Food cost</li><li>Маржинальный анализ</li><li>Бюджет</li><li>Договоры</li><li>Переговоры с поставщиками</li></ul></div>
+        <div><h3>Языки</h3><ul class="kv"><li><span>Русский</span><span>родной</span></li><li><span>Узбекский</span><span>B1, средний</span></li><li><span>Английский</span><span>A2</span></li></ul></div>
+        <div><h3>Образование</h3><p>Академический лицей компьютерных технологий при ТГТУ. Точные науки, математика. 2023.</p></div>
+        <div><h3>Формат работы</h3><p>Ташкент. Офис, гибрид или удалённо.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Давайте обсудим ваши процессы</h2>
+    <p>Расскажите, что сейчас болит в операционке. На встречу приду с вопросами по вашим цифрам и первым вариантом плана под вашу компанию.</p>
+    <div class="lines">
+      <div class="line"><div><small>Телефон</small><span class="val" id="v-phone">+998 90 188 80 77</span></div><button class="copy" type="button" data-copy="v-phone">Скопировать</button></div>
+      <div class="line"><div><small>Почта</small><span class="val" id="v-mail">diamond.ryll@gmail.com</span></div><button class="copy" type="button" data-copy="v-mail">Скопировать</button></div>
+    </div>
+  </section>
+
+  <footer>Владислав Микеев · Ташкент</footer>
+</div>
+
+<script>
+(function () {
+  function tablist(list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var n = tabs[(i + d + tabs.length) % tabs.length];
+        select(n); n.focus();
+      });
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[role="tablist"]'), tablist);
+
+  var buy = document.getElementById('buy'), loss = document.getElementById('loss');
+  function num(n) { return n.toLocaleString('ru-RU', { maximumFractionDigits: 1 }); }
+  function calc() {
+    var b = +buy.value, l = +loss.value;
+    document.getElementById('buy-out').textContent = num(b) + ' млн сум';
+    document.getElementById('loss-out').textContent = l.toLocaleString('ru-RU', { minimumFractionDigits: 1 }) + ' %';
+    var m = b * (l - 1) / 100;
+    if (m <= 0) {
+      document.getElementById('save-m').textContent = 'Вы уже в нормативе';
+      document.getElementById('save-y').textContent = 'Задача: удержать этот уровень';
+    } else {
+      document.getElementById('save-m').textContent = num(m) + ' млн сум в месяц';
+      document.getElementById('save-y').textContent = num(m * 12) + ' млн сум в год';
+    }
+  }
+  buy.addEventListener('input', calc); loss.addEventListener('input', calc); calc();
+
+  Array.prototype.forEach.call(document.querySelectorAll('.copy'), function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      function done() { btn.textContent = 'Скопировано'; setTimeout(function () { btn.textContent = 'Скопировать'; }, 1600); }
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Выделено';
+        setTimeout(function () { btn.textContent = 'Скопировать'; }, 1600);
+      }
+      try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
